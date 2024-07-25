@@ -35,7 +35,7 @@ def hamming(input_string):
     # Get the length of the input string
     input_length = len(input_string)
     # Calculate the number of parity bits needed
-    parity_bits = get_parity_bits(input_length)
+    parity_bits = getParityBits(input_length)
     # Generate a list of columns based on pow(2, i)
     columns = [pow(2, i) for i in range(parity_bits)]
     rows = []
@@ -48,7 +48,7 @@ def hamming(input_string):
     df = pd.DataFrame(rows, columns=columns)
 
     # Compute XOR for each column
-    def xor_columns(col_values):
+    def xorColumns(col_values):
         """
         Compute the XOR for a list of column values.
 
@@ -60,7 +60,7 @@ def hamming(input_string):
         """
         return str(reduce(lambda x, y: int(x) ^ int(y), col_values))
     
-    xor_results = [xor_columns(df[col]) for col in df.columns]
+    xor_results = [xorColumns(df[col]) for col in df.columns]
     
     # Concatenate the results into a single string
     # and get the position of the error.
@@ -76,7 +76,7 @@ def hamming(input_string):
 
     return f'The message is error-free: {input_string[::-1]}'
 
-def get_parity_bits(input_length):
+def getParityBits(input_length):
     """
     Calculate the number of parity bits required for a given input length.
 
@@ -92,7 +92,7 @@ def get_parity_bits(input_length):
         parity_bits += 1
     return parity_bits
 
-def validate_input_string(input_string):
+def validateInputString(input_string):
     """
     Validate that the input string contains only binary characters ('0' or '1').
 
@@ -125,7 +125,7 @@ def main():
             binary_entry = input("Enter the binary data to be transferred:\n")
             
             # Validate the input string
-            if not validate_input_string(binary_entry):
+            if not validateInputString(binary_entry):
                 print("Error: Invalid input. Only binary strings (containing '0' and '1') are allowed.\n")
             else:
                 # Perform the Hamming procedure
