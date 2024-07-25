@@ -69,6 +69,8 @@ def hamming(input_string):
     if xor_int != 0:
         # Convert the string to a list for mutability
         correction = list(input_string)
+        if xor_int >= input_length:
+            return f'Error: The message may have multiple errors.'
         # Fix the bit at the position determined by xor_int
         correction[xor_int - 1] = '1' if correction[xor_int - 1] == '0' else '0'
         input_string = ''.join(correction)
