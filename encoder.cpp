@@ -30,7 +30,7 @@
 #include "utils/client/utils.hpp"
 
 // Define the server IP address
-const char* SERVER_IP = "192.168.1.7";
+const char* SERVER_IP = "10.100.12.180";
 
 /**
  * @brief Converts a string to a binary vector.
@@ -50,7 +50,7 @@ void convertToBinaryVector(const char* str, std::vector<int>& binaryVector) {
         // Convert to binary and extract each bit
         std::bitset<8> bits(asciiValue);
         for (int i = 0; i < 8; ++i) {
-            binaryVector.push_back(bits[i]);
+            binaryVector.push_back(bits[7 - i]);
         }
     }
 }
@@ -95,7 +95,6 @@ int main(int argc, char* argv[]) {
         binaryVector.insert(binaryVector.end(), checksumBinary.begin(), checksumBinary.end());
     } else {
         // Encode with Hamming code
-        std::reverse(binaryVector.begin(), binaryVector.end());
         binaryVector = hammingEncode(binaryVector);
     }
 
